@@ -1,0 +1,142 @@
+<html>
+<head>
+    <style type="text/css">
+        *{
+        margin:0;
+        padding:0;
+        }
+        .box{
+        border:2px solid black;
+        height:300px;
+        width:600px;
+        margin:3rem auto;
+        background: url(file:///C:/Users/sulem/Desktop/1/index.html/Untitled.png);
+        }
+        .block{
+        height:70px;
+        width:40px;
+        background-color:red;
+        position:relative;
+        top:230px;
+        left:560px;
+        animation-name: move;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-delay: 3s;
+        overflow: hidden;
+        }
+        @keyframes move{
+         0%{left: 560px;}
+         100%{left:0px;}
+        }
+        .dino img{
+            height:70px;
+            width:67px;    
+        }
+        .dino{
+         position:relative;
+         top:160px;
+         left: auto;
+        }
+        .result{
+            height:200px;
+            width: 400px;
+            background-color: cornflowerblue;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem auto;
+            display: none;
+        }
+        .score{
+            font-size: 2.2rem;
+            color: brown;          
+        }
+        .btn{
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: none;
+            background-color: black;
+            color: cyan;
+            font-size: 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .cloud img{
+            width: 100px;
+            height:50px;
+        }
+        .load{
+        height:25px;
+        width:400px;
+        background-color: yellow;
+        border: 3px solid black;
+        position:relative;
+        left:37%;
+        border-radius: 20px;
+        animation-name: load;
+        animation-duration: 3s;
+        animation-iteration-count: 3s;
+        text-align: center;
+        font-size: large;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+     }
+     @keyframes load {
+        0%{width: 0px; background-color: none;}
+        50%{width: 200px; background-color: red;}
+        75%{width:300px; background-color: blue;}
+        100%{width: 400px; background-color: yellow;}
+        
+     }
+    </style>
+</head>
+<body>
+    <audio src="file:///C:/Users/sulem/Downloads/sound.mp3" id="sound"></audio>
+<div class="box" id="box">
+    <div class="block" id="block"></div>
+    <div class="dino" id="dino"><img src="file:///C:/Users/sulem/Desktop/1/index.html/monkey-removebg-preview.png"></div>
+</div>
+<div class="result" id="result">
+    <h1>Game over</h1>
+    <p id="score" class="score"></p>
+    <button id="btn" onclick="location.reload()" class="btn">Restart</button>
+</div>
+<div class="load" id="load">Loading</div>
+<script type="text/javascript">
+    var dino =document.getElementById("dino");
+    var block=document.getElementById("block");
+    var result=document.getElementById("result");
+    var score= document.getElementById("score")
+    var box= document.getElementById("box");  
+    var z = document.getElementById("load");
+    var count =0;
+    var hello= document.getElementById("sound");
+    //jump function
+
+    function jump(){
+       dino.style.top ="50px";
+       setTimeout(function(){
+        dino.style.top="160px"
+       },400)
+       count++;
+       hello.play()
+       
+    }
+    window.addEventListener("keydown",jump)
+ 
+    
+    //game over//
+     setInterval(function game(){
+        var gg= parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+        var ss= parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+        if((gg<70)&&(ss>90)){
+          result.style.display="block";
+          box.style.display="none";
+          score.innerHTML=`score: ${count}`
+        }
+    },10)
+</script>
+
+</body>
+</html>
